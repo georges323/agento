@@ -1,6 +1,28 @@
 import os
 import subprocess
 
+from google.genai import types
+
+schema_run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="Run a python file from a specific file path relative to the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="File path of the python file to run relative to the working directory.",
+            ),
+            "args": types.Schema(
+                type=types.Type.ARRAY,
+                items=types.Schema(type=types.Type.STRING),
+                description="Additional arguments to add at the end of the python command. This can be none, which mean no arguments going to be added in the subprocess.",
+            ),
+        },
+        required=["file_path"]
+    ),
+)
+
 def run_python_file(working_directory, file_path, args=None):
     try:
         return _handle_run_python_file(working_directory, file_path, args)
