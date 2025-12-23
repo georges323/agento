@@ -13,9 +13,9 @@ def _handle_get_files_info(working_directory, directory="."):
     target_dir = os.path.normpath(os.path.join(working_directory_abs, directory))
 
     # Checks if the constructed target_dir shares a commonpath to avoid problems
-    valid_targer_dir = os.path.commonpath([working_directory_abs, target_dir]) != working_directory_abs
+    invalid_targer_dir = os.path.commonpath([working_directory_abs, target_dir]) != working_directory_abs
 
-    if valid_targer_dir:
+    if invalid_targer_dir:
         return f'Error: Cannot list "{directory}" as it is outside the permitted working directory'
 
     if not os.path.isdir(target_dir):

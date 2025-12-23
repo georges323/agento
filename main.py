@@ -1,8 +1,12 @@
 import os
 import argparse
+import sys
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+
+from prompts import system_prompt
+
 
 def main():
     print("Hello from agento!")
@@ -34,9 +38,12 @@ def main():
         types.Content(role="user", parts=[types.Part(text=user_prompt)])
     ]
 
+    print(system_prompt)
+
     response = client.models.generate_content(
         model=model,
-        contents=messages
+        contents=messages,
+        config=types.GenerateContentConfig(system_instruction=system_prompt)
     )
 
     usage_metadata = response.usage_metadata
