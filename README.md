@@ -1,3 +1,4 @@
+# Agento
 This is a very basic CLI AI Agent capable of using Gemini
 
 > [!CAUTION]
@@ -8,3 +9,6 @@ This agent is capable of:
 - Writing to files
 - Getting file info
 - Running Python files via subprocessing
+
+### Future Additions
+- Utilizing Pydantic AI to make this model agonstic
